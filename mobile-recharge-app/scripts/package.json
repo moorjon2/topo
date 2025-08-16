@@ -1,0 +1,11 @@
+{
+  "name": "appwrite-deployment-scripts",
+  "version": "1.0.0",
+  "description": "Scripts for deploying Appwrite schema and functions",
+  "scripts": {
+    "deploy-schema": "node deploy-appwrite-schema.js"
+  },
+  "dependencies": {
+    "node-appwrite": "^13.0.0"
+  }
+}

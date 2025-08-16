@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "Mobile Recharge & Remittance",
+    "slug": "mobile-recharge-remittance-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourcompany.mobilerecharge"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.yourcompany.mobilerecharge"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "environment": "$APP_ENVIRONMENT",
+      "appwriteEndpoint": "$APPWRITE_ENDPOINT",
+      "appwriteProjectId": "$APPWRITE_PROJECT_ID",
+      "appwriteDatabaseId": "$APPWRITE_DATABASE_ID",
+      "dtShopApiUrl": "$DTSHOP_API_URL",
+      "dtShopApiKey": "$DTSHOP_API_KEY",
+      "niumApiUrl": "$NIUM_API_URL",
+      "niumClientId": "$NIUM_CLIENT_ID",
+      "niumClientSecret": "$NIUM_CLIENT_SECRET",
+      "stripePublishableKey": "$STRIPE_PUBLISHABLE_KEY"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
+  }
+}

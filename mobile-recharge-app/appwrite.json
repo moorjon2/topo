@@ -1,0 +1,54 @@
+{
+  "projectId": "mobile-recharge-app",
+  "projectName": "Mobile Recharge & Remittance App",
+  "functions": [
+    {
+      "name": "fraud-detection",
+      "runtime": "node-18.0",
+      "path": "appwrite/functions/fraud-detection",
+      "entrypoint": "src/main.js",
+      "ignore": ["node_modules", ".npm"],
+      "execute": ["users"],
+      "events": [],
+      "schedule": "",
+      "timeout": 15,
+      "enabled": true,
+      "logging": true,
+      "scopes": ["databases.read", "databases.write"]
+    },
+    {
+      "name": "transaction-callback",
+      "runtime": "node-18.0",
+      "path": "appwrite/functions/transaction-callback",
+      "entrypoint": "src/main.js",
+      "ignore": ["node_modules", ".npm"],
+      "execute": ["any"],
+      "events": [],
+      "schedule": "",
+      "timeout": 30,
+      "enabled": true,
+      "logging": true,
+      "scopes": ["databases.read", "databases.write"]
+    },
+    {
+      "name": "user-validation",
+      "runtime": "node-18.0",
+      "path": "appwrite/functions/user-validation",
+      "entrypoint": "src/main.js",
+      "ignore": ["node_modules", ".npm"],
+      "execute": ["users"],
+      "events": [],
+      "schedule": "",
+      "timeout": 10,
+      "enabled": true,
+      "logging": true,
+      "scopes": ["databases.read"]
+    }
+  ],
+  "databases": [
+    {
+      "name": "mobile-recharge-db",
+      "id": "mobile-recharge-db"
+    }
+  ]
+}

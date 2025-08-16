@@ -1,0 +1,12 @@
+{
+  "name": "fraud-detection",
+  "version": "1.0.0",
+  "description": "Fraud detection function for transactions",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "node-appwrite": "^13.0.0"
+  }
+}

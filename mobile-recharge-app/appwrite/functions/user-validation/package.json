@@ -1,0 +1,12 @@
+{
+  "name": "user-validation",
+  "version": "1.0.0",
+  "description": "User validation function for usernames, cashtags, and phone numbers",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "node-appwrite": "^13.0.0"
+  }
+}

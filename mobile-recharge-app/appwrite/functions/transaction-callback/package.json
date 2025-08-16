@@ -1,0 +1,12 @@
+{
+  "name": "transaction-callback",
+  "version": "1.0.0",
+  "description": "Transaction callback handler for Stripe, Nium, and DT Shop",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "node-appwrite": "^13.0.0"
+  }
+}

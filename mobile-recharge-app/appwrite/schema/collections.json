@@ -1,0 +1,377 @@
+{
+  "collections": [
+    {
+      "name": "users",
+      "id": "users",
+      "permissions": [
+        "read(\"user:self\")",
+        "write(\"user:self\")",
+        "create(\"users\")"
+      ],
+      "attributes": [
+        {
+          "key": "userId",
+          "type": "string",
+          "size": 255,
+          "required": true
+        },
+        {
+          "key": "email",
+          "type": "string",
+          "size": 255,
+          "required": true
+        },
+        {
+          "key": "username",
+          "type": "string",
+          "size": 50,
+          "required": true
+        },
+        {
+          "key": "cashtag",
+          "type": "string",
+          "size": 50,
+          "required": true
+        },
+        {
+          "key": "phoneNumber",
+          "type": "string",
+          "size": 20,
+          "required": false
+        },
+        {
+          "key": "profilePicture",
+          "type": "string",
+          "size": 500,
+          "required": false
+        },
+        {
+          "key": "verificationStatus",
+          "type": "string",
+          "size": 1000,
+          "required": true,
+          "default": "{\"email\":false,\"phone\":false,\"bankAccount\":false,\"debitCard\":false}"
+        },
+        {
+          "key": "preferences",
+          "type": "string",
+          "size": 2000,
+          "required": true,
+          "default": "{\"notifications\":{\"push\":true,\"email\":true,\"sms\":true},\"privacy\":{\"profileVisibility\":\"public\",\"allowSearchByPhone\":true},\"language\":\"en\",\"currency\":\"USD\"}"
+        }
+      ],
+      "indexes": [
+        {
+          "key": "username_unique",
+          "type": "unique",
+          "attributes": ["username"]
+        },
+        {
+          "key": "cashtag_unique",
+          "type": "unique",
+          "attributes": ["cashtag"]
+        },
+        {
+          "key": "email_unique",
+          "type": "unique",
+          "attributes": ["email"]
+        },
+        {
+          "key": "phone_search",
+          "type": "key",
+          "attributes": ["phoneNumber"]
+        }
+      ]
+    },
+    {
+      "name": "transactions",
+      "id": "transactions",
+      "permissions": [
+        "read(\"user:self\")",
+        "write(\"user:self\")",
+        "create(\"users\")"
+      ],
+      "attributes": [
+        {
+          "key": "userId",
+          "type": "string",
+          "size": 255,
+          "required": true
+        },
+        {
+          "key": "type",
+          "type": "string",
+          "size": 50,
+          "required": true
+        },
+        {
+          "key": "status",
+          "type": "string",
+          "size": 50,
+          "required": true,
+          "default": "pending"
+        },
+        {
+          "key": "amount",
+          "type": "double",
+          "required": true
+        },
+        {
+          "key": "currency",
+          "type": "string",
+          "size": 10,
+          "required": true
+        },
+        {
+          "key": "fees",
+          "type": "double",
+          "required": true,
+          "default": 0
+        },
+        {
+          "key": "exchangeRate",
+          "type": "double",
+          "required": false
+        },
+        {
+          "key": "recipient",
+          "type": "string",
+          "size": 2000,
+          "required": true
+        },
+        {
+          "key": "paymentMethodId",
+          "type": "string",
+          "size": 255,
+          "required": true
+        },
+        {
+          "key": "externalTransactionId",
+          "type": "string",
+          "size": 255,
+          "required": false
+        },
+        {
+          "key": "metadata",
+          "type": "string",
+          "size": 5000,
+          "required": false,
+          "default": "{}"
+        }
+      ],
+      "indexes": [
+        {
+          "key": "user_transactions",
+          "type": "key",
+          "attributes": ["userId"]
+        },
+        {
+          "key": "transaction_status",
+          "type": "key",
+          "attributes": ["status"]
+        },
+        {
+          "key": "transaction_type",
+          "type": "key",
+          "attributes": ["type"]
+        },
+        {
+          "key": "created_at_desc",
+          "type": "key",
+          "attributes": ["$createdAt"],
+          "orders": ["DESC"]
+        }
+      ]
+    },
+    {
+      "name": "conversations",
+      "id": "conversations",
+      "permissions": [
+        "read(\"user:self\")",
+        "write(\"user:self\")",
+        "create(\"users\")"
+      ],
+      "attributes": [
+        {
+          "key": "participants",
+          "type": "string",
+          "size": 1000,
+          "required": true,
+          "array": true
+        },
+        {
+          "key": "lastMessageId",
+          "type": "string",
+          "size": 255,
+          "required": false
+        },
+        {
+          "key": "lastActivity",
+          "type": "datetime",
+          "required": true
+        },
+        {
+          "key": "isArchived",
+          "type": "boolean",
+          "required": true,
+          "default": false
+        }
+      ],
+      "indexes": [
+        {
+          "key": "participants_search",
+          "type": "key",
+          "attributes": ["participants"]
+        },
+        {
+          "key": "last_activity_desc",
+          "type": "key",
+          "attributes": ["lastActivity"],
+          "orders": ["DESC"]
+        }
+      ]
+    },
+    {
+      "name": "messages",
+      "id": "messages",
+      "permissions": [
+        "read(\"user:self\")",
+        "write(\"user:self\")",
+        "create(\"users\")"
+      ],
+      "attributes": [
+        {
+          "key": "conversationId",
+          "type": "string",
+          "size": 255,
+          "required": true
+        },
+        {
+          "key": "senderId",
+          "type": "string",
+          "size": 255,
+          "required": true
+        },
+        {
+          "key": "type",
+          "type": "string",
+          "size": 50,
+          "required": true,
+          "default": "text"
+        },
+        {
+          "key": "content",
+          "type": "string",
+          "size": 5000,
+          "required": true
+        },
+        {
+          "key": "transactionData",
+          "type": "string",
+          "size": 2000,
+          "required": false
+        },
+        {
+          "key": "status",
+          "type": "string",
+          "size": 20,
+          "required": true,
+          "default": "sent"
+        },
+        {
+          "key": "isEncrypted",
+          "type": "boolean",
+          "required": true,
+          "default": true
+        }
+      ],
+      "indexes": [
+        {
+          "key": "conversation_messages",
+          "type": "key",
+          "attributes": ["conversationId"]
+        },
+        {
+          "key": "sender_messages",
+          "type": "key",
+          "attributes": ["senderId"]
+        },
+        {
+          "key": "timestamp_asc",
+          "type": "key",
+          "attributes": ["$createdAt"],
+          "orders": ["ASC"]
+        }
+      ]
+    },
+    {
+      "name": "payment_methods",
+      "id": "payment_methods",
+      "permissions": [
+        "read(\"user:self\")",
+        "write(\"user:self\")",
+        "create(\"users\")"
+      ],
+      "attributes": [
+        {
+          "key": "userId",
+          "type": "string",
+          "size": 255,
+          "required": true
+        },
+        {
+          "key": "stripePaymentMethodId",
+          "type": "string",
+          "size": 255,
+          "required": true
+        },
+        {
+          "key": "type",
+          "type": "string",
+          "size": 50,
+          "required": true
+        },
+        {
+          "key": "last4",
+          "type": "string",
+          "size": 4,
+          "required": true
+        },
+        {
+          "key": "brand",
+          "type": "string",
+          "size": 50,
+          "required": false
+        },
+        {
+          "key": "expiryMonth",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "key": "expiryYear",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "key": "isDefault",
+          "type": "boolean",
+          "required": true,
+          "default": false
+        }
+      ],
+      "indexes": [
+        {
+          "key": "user_payment_methods",
+          "type": "key",
+          "attributes": ["userId"]
+        },
+        {
+          "key": "stripe_payment_method",
+          "type": "unique",
+          "attributes": ["stripePaymentMethodId"]
+        }
+      ]
+    }
+  ]
+}
